@@ -1,5 +1,6 @@
 package com.diogo.vivo.dto;
 
+import com.diogo.vivo.models.UserModel;
 import jakarta.validation.constraints.Email;
 
 import java.io.Serializable;
@@ -13,6 +14,12 @@ public class UserDto implements Serializable {
     private String document;
 
     public UserDto() {
+    }
+
+    public UserDto(UserModel user) {
+        this.name = user.getName();
+        this.email = user.getEmail();
+        this.document = user.getDocument();
     }
 
     public String getName() {
