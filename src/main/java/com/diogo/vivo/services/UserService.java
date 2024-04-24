@@ -13,4 +13,6 @@ public interface UserService {
     UserDto getByEmail(String email);
 
     UserModel insert(UserDto userDto);
+
+    void updateUser(String email, UserDto user);
 }

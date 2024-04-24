@@ -4,9 +4,12 @@ import com.diogo.vivo.dto.UserDto;
 import com.diogo.vivo.models.UserModel;
 import com.diogo.vivo.repositories.UserRepository;
 import com.diogo.vivo.services.UserService;
+import org.apache.catalina.util.StringUtil;
+import org.apache.logging.log4j.util.Strings;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +38,23 @@ public class UserServiceImpl implements UserService {
         UserModel userModel = this.fromDTO(userDto);
         userRepository.save(userModel);
         return userModel;
+    }
+
+    @Override
+    public void updateUser(String email, UserDto userDto) {
+        UserModel userModel = userRepository.findByEmail(email);
+        if (userModel != null) {
+            this.updateData(userModel, userDto);
+            userRepository.save(userModel);
+        } else {
+            throw new ObjectNotFoundException((Object) email, "Email not found");
+        }
+    }
+
+    private void updateData(UserModel userModel, UserDto userDto) {
+        if (Strings.isNotEmpty(userDto.getName())) userModel.setName(userDto.getName());
+        if (Strings.isNotEmpty(userDto.getEmail())) userModel.setEmail(userDto.getEmail());
+        if (Strings.isNotEmpty(userDto.getDocument())) userModel.setDocument(userDto.getDocument());
     }
 
     private UserModel fromDTO(UserDto userDto) {

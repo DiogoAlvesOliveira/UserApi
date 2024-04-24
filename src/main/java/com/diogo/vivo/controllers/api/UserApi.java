@@ -19,4 +19,7 @@ public interface UserApi {
 
     @PostMapping
     ResponseEntity<Void> insertUser(@Valid @RequestBody UserDto user);
+
+    @PutMapping(value = "/{email}")
+    ResponseEntity<Void> updateUser(@Valid @PathVariable String email, @RequestBody UserDto user);
 }
