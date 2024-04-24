@@ -29,4 +29,15 @@ public class UserServiceImpl implements UserService {
         if (user != null) return new UserDto(user);
         throw new ObjectNotFoundException((Object) email, "Email not found");
     }
+
+    @Override
+    public UserModel insert(UserDto userDto) {
+        UserModel userModel = this.fromDTO(userDto);
+        userRepository.save(userModel);
+        return userModel;
+    }
+
+    private UserModel fromDTO(UserDto userDto) {
+        return new UserModel(userDto.getName(), userDto.getEmail(), userDto.getDocument());
+    }
 }
