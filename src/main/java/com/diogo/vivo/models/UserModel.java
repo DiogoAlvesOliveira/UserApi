@@ -16,6 +16,16 @@ public class UserModel implements Serializable {
     private String email;
     private String document;
 
+    public UserModel() {
+    }
+
+    public UserModel(String name, String email, String document) {
+        this.id = null;
+        this.name = name;
+        this.email = email;
+        this.document = document;
+    }
+
     public Integer getId() {
         return id;
     }
