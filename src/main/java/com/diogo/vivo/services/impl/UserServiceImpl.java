@@ -4,14 +4,11 @@ import com.diogo.vivo.dto.UserDto;
 import com.diogo.vivo.models.UserModel;
 import com.diogo.vivo.repositories.UserRepository;
 import com.diogo.vivo.services.UserService;
-import org.apache.catalina.util.StringUtil;
 import org.apache.logging.log4j.util.Strings;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

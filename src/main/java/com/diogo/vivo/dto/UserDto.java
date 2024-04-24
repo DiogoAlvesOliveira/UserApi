@@ -22,6 +22,12 @@ public class UserDto implements Serializable {
         this.document = user.getDocument();
     }
 
+    public UserDto(String name, String email, String document) {
+        this.name = name;
+        this.email = email;
+        this.document = document;
+    }
+
     public String getName() {
         return name;
     }
