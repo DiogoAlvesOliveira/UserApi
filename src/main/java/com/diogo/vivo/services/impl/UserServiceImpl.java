@@ -4,6 +4,7 @@ import com.diogo.vivo.dto.UserDto;
 import com.diogo.vivo.models.UserModel;
 import com.diogo.vivo.repositories.UserRepository;
 import com.diogo.vivo.services.UserService;
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,5 +21,12 @@ public class UserServiceImpl implements UserService {
     public List<UserDto> getAllUsers() {
         List<UserModel>users = userRepository.findAll();
         return users.stream().map(UserDto::new).toList();
+    }
+
+    @Override
+    public UserDto getByEmail(String email) {
+        UserModel user = userRepository.findByEmail(email);
+        if (user != null) return new UserDto(user);
+        throw new ObjectNotFoundException((Object) email, "Email not found");
     }
 }
